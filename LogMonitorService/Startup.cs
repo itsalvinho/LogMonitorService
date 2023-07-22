@@ -1,10 +1,12 @@
-﻿using Serilog;
+﻿using LogMonitorService.Services;
+using LogMonitorService.Services.Abstractions;
 
 namespace LogMonitorService
 {
     public class Startup
     {
         public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             this.Configuration = configuration;
@@ -12,9 +14,14 @@ namespace LogMonitorService
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            // Add services for retrieval of data
+            services.AddSingleton<ILogReaderService, DefaultLogReaderService>();
 
-            // Adds versioning for API and if version isn't specified, it defaults to use 1.0.
+            // Add services for controllers
+            services.AddSingleton<ILogsControllerService, LogsControllerService>();
+
+            // Add controllers for APIs
+            services.AddControllers();
             services.AddApiVersioning(opt =>
             {
                 opt.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);

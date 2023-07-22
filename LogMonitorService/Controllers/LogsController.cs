@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using LogMonitorService.Constants;
+using LogMonitorService.Services.Abstractions;
 
 namespace LogMonitorService.Controllers
 {
@@ -10,16 +11,19 @@ namespace LogMonitorService.Controllers
     public class LogsController : ControllerBase
     {
         private readonly ILogger<LogsController> _logger;
+        private readonly ILogsControllerService _logsControllerService;
 
-        public LogsController(ILogger<LogsController> logger)
+        public LogsController(ILogger<LogsController> logger, ILogsControllerService logsControllerService)
         {
             _logger = logger;
+            _logsControllerService = logsControllerService;
         }
 
         [HttpGet]
         public ActionResult Index()
         {
-            _logger.LogDebug("HELLOOO");
+            // TODO: use _logsControllerService to read logs
+
             return Ok("Hello I return logs!");
         }
     }
