@@ -2,6 +2,6 @@
 {
     public interface ILogsControllerService
     {
-        Task ReadLogsToStream(Stream stream, string fileName, string searchText, long maxLinesToReturn);
+        Task ReadLogsToStream(Stream stream, string filename, string? searchText = null, long? maxLinesToReturn = null);
     }
 }

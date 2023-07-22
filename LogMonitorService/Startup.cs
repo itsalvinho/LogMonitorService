@@ -1,4 +1,5 @@
-﻿using LogMonitorService.Services;
+﻿using LogMonitorService.Models.Configuration;
+using LogMonitorService.Services;
 using LogMonitorService.Services.Abstractions;
 
 namespace LogMonitorService
@@ -14,6 +15,12 @@ namespace LogMonitorService
 
         public void ConfigureServices(IServiceCollection services)
         {
+            AppConfig appConfig = Configuration.GetSection("AppConfig").Get<AppConfig>();
+            if (appConfig == null) throw new Exception("AppConfig must be provided in appsettings.json");
+
+            // Add services for configuring the application
+            services.AddSingleton<AppConfig>(appConfig);
+            
             // Add services for retrieval of data
             services.AddSingleton<ILogReaderService, DefaultLogReaderService>();
 

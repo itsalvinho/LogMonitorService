@@ -1,21 +1,27 @@
-﻿using LogMonitorService.Services.Abstractions;
+﻿using LogMonitorService.Models.Configuration;
+using LogMonitorService.Services.Abstractions;
 
 namespace LogMonitorService.Services
 {
     internal class LogsControllerService : ILogsControllerService
     {
+        private readonly AppConfig _appConfig;
         private readonly ILogReaderService _logReaderService;
 
-        public LogsControllerService(ILogReaderService logReaderService) 
-        { 
+        public LogsControllerService(
+            AppConfig appConfig,
+            ILogReaderService logReaderService)
+        {
+            _appConfig = appConfig;
             _logReaderService = logReaderService;
         }
 
-        public async Task ReadLogsToStream(Stream stream, string fileName, string searchText, long maxLinesToReturn)
+        public async Task ReadLogsToStream(Stream stream, string filename, string? searchText = null, long? maxLinesToReturn = null)
         {
-            // TODO: Implement by using _logReaderService
+            long maxLines = maxLinesToReturn ?? _appConfig.DefaultNumberOfLogsToReturn;
+            string logPath = Path.Combine(_appConfig.PathToLogs, filename);
 
-            throw new NotImplementedException();
+            await _logReaderService.ReadLogsToStreamReadLogsToStream(stream, logPath, searchText, maxLines);
         }
     }
 }

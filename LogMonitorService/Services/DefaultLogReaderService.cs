@@ -9,7 +9,7 @@ namespace LogMonitorService.Services
 
         }
 
-        public Task ReadLogsToStream(Stream stream, string logFile, string searchText, long maxLinesToReturn)
+        public Task ReadLogsToStreamReadLogsToStream(Stream stream, string logPath, string? searchText = null, long? maxLinesToReturn = null)
         {
             // TODO: implement to read from a file location
 
