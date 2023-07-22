@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using LogMonitorService.Models.Responses;
+using LogMonitorService.Models.API.Responses;
 
 namespace LogMonitorService.Controllers
 {

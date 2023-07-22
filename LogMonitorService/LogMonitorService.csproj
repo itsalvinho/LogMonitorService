@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\Requests\" />
+    <Folder Include="Models\API\Requests\" />
   </ItemGroup>
 
 </Project>

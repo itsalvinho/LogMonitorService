@@ -1,13 +1,13 @@
 ﻿using System.Reflection;
 
-namespace LogMonitorService.Models.Responses
+namespace LogMonitorService.Models.API.Responses
 {
     public class HealthCheckResponse
     {
         public HealthCheckResponse(string status)
         {
-            this.Version = typeof(Program).GetTypeInfo().Assembly.GetCustomAttribute<AssemblyFileVersionAttribute>().Version;
-            this.Status = status;
+            Version = typeof(Program).GetTypeInfo().Assembly.GetCustomAttribute<AssemblyFileVersionAttribute>().Version;
+            Status = status;
         }
 
         public string Version { get; }
