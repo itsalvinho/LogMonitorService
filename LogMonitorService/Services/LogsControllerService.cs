@@ -21,7 +21,7 @@ namespace LogMonitorService.Services
             long maxLines = maxLinesToReturn ?? _appConfig.DefaultNumberOfLogsToReturn;
             string logPath = Path.Combine(_appConfig.PathToLogs, filename);
 
-            await _logReaderService.ReadLogsToStreamReadLogsToStream(stream, logPath, searchText, maxLines);
+            await _logReaderService.ReadLogsToStream(stream, logPath, searchText, maxLines);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace LogMonitorService.Services
 
         }
 
-        public async Task ReadLogsToStreamReadLogsToStream(Stream stream, string logPath, string? searchText = null, long? maxLinesToReturn = null)
+        public async Task ReadLogsToStream(Stream stream, string logPath, string? searchText = null, long? maxLinesToReturn = null)
         {
             using (StreamWriter sw = new StreamWriter(stream, System.Text.Encoding.UTF8))
             {
