@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using LogMonitorService.Constants;
 using LogMonitorService.Services.Abstractions;
+using System.Net.Mime;
+using LogMonitorService.Models.API.Requests;
 
 namespace LogMonitorService.Controllers
 {
@@ -19,12 +21,13 @@ namespace LogMonitorService.Controllers
             _logsControllerService = logsControllerService;
         }
 
-        [HttpGet]
-        public ActionResult Index()
+        [HttpGet("{filename}")]
+        [ActionName("GetLogs")]
+        public async Task<ActionResult> GetLogs([FromQuery] GetLogsRequest request, string filename)
         {
-            // TODO: use _logsControllerService to read logs
-
-            return Ok("Hello I return logs!");
+            Response.ContentType = MediaTypeNames.Text.Plain;
+            await this._logsControllerService.ReadLogsToStream(Response.Body, filename, request.SearchText, request.NumOfLogsToReturn);
+            return new EmptyResult();
         }
     }
 }
