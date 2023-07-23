@@ -18,6 +18,8 @@ namespace LogMonitorService.Services
 
         public async Task ReadLogsToStream(Stream stream, string filename, string? searchText = null, long? maxLinesToReturn = null)
         {
+            // TODO: Add validation for controller
+
             long maxLines = maxLinesToReturn ?? _appConfig.DefaultNumberOfLogsToReturn;
             string logPath = Path.Combine(_appConfig.PathToLogs, filename);
 
