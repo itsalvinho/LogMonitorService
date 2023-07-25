@@ -4,9 +4,11 @@ namespace LogMonitorService.Services
 {
     internal class DefaultLogReaderService : ILogReaderService
     {
-        public DefaultLogReaderService() 
-        { 
+        private readonly ILogger<DefaultLogReaderService> _logger;
 
+        public DefaultLogReaderService(ILogger<DefaultLogReaderService> logger)
+        {
+            _logger = logger;
         }
 
         public async Task ReadLogsToStream(Stream stream, string logPath, string? searchText = null, long? maxLinesToReturn = null, CancellationToken cancellationToken = default)

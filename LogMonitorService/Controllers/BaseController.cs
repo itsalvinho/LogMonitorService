@@ -18,6 +18,8 @@ namespace LogMonitorService.Controllers
                     return Unauthorized(response);
                 case ResultType.InvalidRequest:
                     return BadRequest(response);
+                case ResultType.NotFound:
+                    return NotFound(response);
                 case ResultType.UnknownError:
                     return StatusCode(StatusCodes.Status500InternalServerError, response);
                 case ResultType.Success:

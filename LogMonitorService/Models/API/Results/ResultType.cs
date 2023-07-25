@@ -4,6 +4,7 @@
     {
         Success,
         InvalidRequest,
+        NotFound,
         NoPermission,
         UnknownError
     }
