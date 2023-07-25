@@ -2,6 +2,6 @@
 {
     public interface ILogReaderService
     {
-        Task ReadLogsToStream(Stream stream, string logPath, string? searchText = null, long? maxLinesToReturn = null);
+        Task ReadLogsToStream(Stream stream, string logPath, string? searchText = null, long? maxLinesToReturn = null, CancellationToken cancellationToken = default);
     }
 }

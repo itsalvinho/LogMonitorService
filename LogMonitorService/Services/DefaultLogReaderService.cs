@@ -9,7 +9,7 @@ namespace LogMonitorService.Services
 
         }
 
-        public async Task ReadLogsToStream(Stream stream, string logPath, string? searchText = null, long? maxLinesToReturn = null)
+        public async Task ReadLogsToStream(Stream stream, string logPath, string? searchText = null, long? maxLinesToReturn = null, CancellationToken cancellationToken = default)
         {
             // TODO: Remove test data and implement the actual reading and parsing of a log file
             // It should also check if the log path exists before reading and throw an exception indicating that it doesn't exist

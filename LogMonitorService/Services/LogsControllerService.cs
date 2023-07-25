@@ -16,7 +16,7 @@ namespace LogMonitorService.Services
             _logReaderService = logReaderService;
         }
 
-        public async Task ReadLogsToStream(Stream stream, string filename, string? searchText = null, long? maxLinesToReturn = null)
+        public async Task ReadLogsToStream(Stream stream, string filename, string? searchText = null, long? maxLinesToReturn = null, CancellationToken cancellationToken = default)
         {
             // TODO: Add validation for controller
 

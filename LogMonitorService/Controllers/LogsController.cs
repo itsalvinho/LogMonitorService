@@ -23,10 +23,10 @@ namespace LogMonitorService.Controllers
 
         [HttpGet("{filename}")]
         [ActionName("GetLogs")]
-        public async Task<ActionResult> GetLogs([FromQuery] GetLogsRequest request, string filename)
+        public async Task<ActionResult> GetLogs([FromQuery] GetLogsRequest request, string filename, CancellationToken cancellationToken)
         {
             Response.ContentType = MediaTypeNames.Text.Plain;
-            await this._logsControllerService.ReadLogsToStream(Response.Body, filename, request.SearchText, request.NumOfLogsToReturn);
+            await this._logsControllerService.ReadLogsToStream(Response.Body, filename, request.SearchText, request.NumOfLogsToReturn, cancellationToken);
             return new EmptyResult();
         }
     }
