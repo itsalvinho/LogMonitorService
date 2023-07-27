@@ -52,7 +52,7 @@ namespace LogMonitorService.Services
 
                 // Read until end of file or we've returned over maxLinesToReturn. If maxLinesToReturn is -1, then it'll read till the entire file is parsed.
                 while (
-                    !rsReader.IsAtEnd() && 
+                    (!string.IsNullOrWhiteSpace(line) || !rsReader.IsAtEnd()) && 
                     (maxLinesToReturn == -1 || linesReturned < maxLinesToReturn)  &&
                     !cancellationToken.IsCancellationRequested)
                 {

@@ -156,7 +156,7 @@ namespace LogMonitorService.Utilities
         /// </summary>
         public bool IsAtEnd()
         {
-            return _stream.Position == 0;
+            return _parsedLines.Count == 0 && _stream.Position == 0;
         }
 
         public void Dispose()
