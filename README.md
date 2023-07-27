@@ -4,9 +4,14 @@ This is a .NET 6 project used to read log files.  It serves as an API for users 
 
 **Table of Contents**
 
-[TOCM]
-
-[TOC]
+* [Deployment](#Deployment)
+   * [Custom Settings](#Custom Settings)
+   * [Mounting a directory containing your logs](#Mounting a directory containing your logs)
+* [APIs](#APIs)
+   * [Testing](#Testing)
+   * [GET /healthcheck](#GET /healthcheck)
+   * [GET /api/v1.0/jobs/{filename}](#GET /api/v1.0/jobs/{filename})
+* [Improvements](#Improvements)
 
 # Deployment
 
