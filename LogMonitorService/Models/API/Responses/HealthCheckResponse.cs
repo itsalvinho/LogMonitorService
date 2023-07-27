@@ -2,6 +2,9 @@
 
 namespace LogMonitorService.Models.API.Responses
 {
+    /// <summary>
+    /// Response object for the /healthcheck endpoint
+    /// </summary>
     public class HealthCheckResponse
     {
         public HealthCheckResponse(string status)

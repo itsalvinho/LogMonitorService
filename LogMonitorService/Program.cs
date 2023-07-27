@@ -1,6 +1,8 @@
 using LogMonitorService;
 using Serilog;
 
+Console.WriteLine("Log Monitor Service started");
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Configure Serilog

@@ -3,10 +3,13 @@ using LogMonitorService.Models.API.Responses;
 
 namespace LogMonitorService.Controllers
 {
-    // Route /api/v1.0/logs
+    /// <summary>
+    /// API: /healthcheck
+    /// To provide an API for testing the health of the application
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
-    public class HealthCheckController : ControllerBase
+    public class HealthCheckController : BaseController
     {
         private const string HEALTHY_MESSAGE = "Log Monitor Service is healthy";
 
@@ -17,9 +20,15 @@ namespace LogMonitorService.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// GET /healthcheck
+        /// Provides a JSON response and status code indicating the application is running
+        /// </summary>
         [HttpGet]
-        public ActionResult Index()
+        public IActionResult Index()
         {
+            _logger.LogTrace("Healtcheck enpoint hit!");
+
             HealthCheckResponse response = new HealthCheckResponse(HEALTHY_MESSAGE);
             return Ok(response);
         }

@@ -1,10 +1,13 @@
-﻿using Serilog;
+﻿using LogMonitorService.Models.Configuration;
+using LogMonitorService.Services;
+using LogMonitorService.Services.Abstractions;
 
 namespace LogMonitorService
 {
     public class Startup
     {
         public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             this.Configuration = configuration;
@@ -12,9 +15,20 @@ namespace LogMonitorService
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            AppConfig appConfig = Configuration.GetSection("AppConfig").Get<AppConfig>();
+            if (appConfig == null) throw new Exception("AppConfig must be provided in appsettings.json");
 
-            // Adds versioning for API and if version isn't specified, it defaults to use 1.0.
+            // Add services for configuring the application
+            services.AddSingleton<AppConfig>(appConfig);
+            
+            // Add services for retrieval of data
+            services.AddSingleton<ILogReaderService, DefaultLogReaderService>();
+
+            // Add services for controllers
+            services.AddSingleton<ILogsControllerService, LogsControllerService>();
+
+            // Add controllers for APIs
+            services.AddControllers();
             services.AddApiVersioning(opt =>
             {
                 opt.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
@@ -24,12 +38,8 @@ namespace LogMonitorService
 
         public void Configure(WebApplication app, IWebHostEnvironment env)
         {
-            app.UseHttpsRedirection();
-
-            app.UseAuthorization();
-
+            //app.UseAuthorization();
             app.MapControllers();
-
             app.Run();
         }
     }
