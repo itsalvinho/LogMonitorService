@@ -3,7 +3,10 @@ using LogMonitorService.Models.API.Responses;
 
 namespace LogMonitorService.Controllers
 {
-    // Route /healthcheck
+    /// <summary>
+    /// API: /healthcheck
+    /// To provide an API for testing the health of the application
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class HealthCheckController : BaseController
@@ -17,6 +20,10 @@ namespace LogMonitorService.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// GET /healthcheck
+        /// Provides a JSON response and status code indicating the application is running
+        /// </summary>
         [HttpGet]
         public IActionResult Index()
         {

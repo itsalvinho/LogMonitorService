@@ -1,12 +1,17 @@
 ﻿namespace LogMonitorService.Models.API.Results
 {
-    public class ServiceResult<T>: BaseServiceResult
+    /// <summary>
+    /// Used by services that facilitate API controllers to abstract the results so that API responses can be generated accordingly
+    /// </summary>
+    public class ServiceResult
     {
-        public T Data { get; }
+        public ResultType ResultType { get; }
+        public Exception Exception { get; }
 
-        public ServiceResult(ResultType resultType, T data = default(T), Exception exception = null) : base(resultType, exception)
+        public ServiceResult(ResultType resultTpye, Exception exception = null)
         {
-            Data = data;
+            ResultType = resultTpye;
+            Exception = exception;
         }
     }
 }
