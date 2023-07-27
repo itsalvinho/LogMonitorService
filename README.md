@@ -4,15 +4,16 @@ This is a .NET 6 project used to read log files.  It serves as an API for users 
 
 **Table of Contents**
 
-* [Deployment](#Deployment)
-   * [Custom Settings](#Custom Settings)
-   * [Mounting a directory containing your logs](#Mounting a directory containing your logs)
+* [Deployment](#deployment)
+   * [Custom Settings](#custom_settings)
+   * [Mounting a directory containing your logs](#mounting_directory)
 * [APIs](#APIs)
-   * [Testing](#Testing)
-   * [GET /healthcheck](#GET /healthcheck)
-   * [GET /api/v1.0/jobs/{filename}](#GET /api/v1.0/jobs/{filename})
-* [Improvements](#Improvements)
+   * [Testing](#testing)
+   * [GET /healthcheck](#healthcheck_api)
+   * [GET /api/v1.0/jobs/{filename}](#jobs_api)
+* [Improvements](#improvements)
 
+<a name="deployment"></a>
 # Deployment
 
 The simplest way to run this project is to use Docker, otherwise you would need dotnet runtimes (.NET 6) installed on your machine, build, publish, and run it using IIS, nginx, or some any sort of server, which can be complicated to figure out. Simplest way is to:
@@ -31,6 +32,7 @@ The simplest way to run this project is to use Docker, otherwise you would need 
     ```
 The service will start up on port `5000` of your localhost. You may hit the endpoint http://localhost/healthcheck to check whether the health of the application.
 
+<a name="custom_settings"></a>
 ### Custom Settings
 
 There are three different application settings that you can configure to your environment. In the **/LogMonitorService/appsettings.json** file, you can see the following JSON section:
@@ -58,6 +60,7 @@ Each of the above settings can either be updated in the appsettings.json and run
    docker run --rm -p 5000:80 -e AppConfig__PathToLogs="/var/log" -e AppConfig__DefaultNumberOfLogsToReturn=100 -e AppConfig__Encoding="UTF-8" log-monitor-service
 ```
 
+<a name="mounting_directory"></a>
 ### Mounting a directory containing your logs
 
 You may have existing log files you want to test this against on the host machine. Easiest way is to mount the directory of your host machine containing your log files to the Docker container as a volume so that it has access to your logs. You may also want to adjust the **AppConfig__PathToLogs** environment variable as well to reflect the mount location. Example:
@@ -69,6 +72,7 @@ Please note that Docker only accepts lowercase paths.
 
 # APIs
 
+<a name="testing"></a>
 ### Testing
 Note to test the APIs you can either use curl (provided in each of their respective descriptions below) or use Postman. If you choose to use Postman, in their UI, go to Import > Raw Text and paste in the following:
 
@@ -135,6 +139,7 @@ Note to test the APIs you can either use curl (provided in each of their respect
 }
 ```
 
+<a name="healthcheck_api"></a>
 ### GET /healthcheck
 
 Example curl command:
@@ -150,6 +155,8 @@ It returns a 200 status containing a JSON response object with the version and s
     "status": "Log Monitor Service is healthy"
 }
 ```
+
+<a name="jobs_api"></a>
 ### GET /api/v1.0/jobs/{filename}
 
 Example curl command:
@@ -168,6 +175,7 @@ NumOfLogsToReturn  | `Optional` This maximum number of logs that the API will re
 The API streams the queried logs into the Response Body of the request returning logs from newest to oldest.
 The response headers will be of **Content-Type**: **text/plain** with **Transfer-Encoding**: **chunked**.
 
+<a name="improvements"></a>
 # Improvements
 
 Here are some improvements that can be done to improve the project:
