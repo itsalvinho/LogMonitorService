@@ -19,4 +19,5 @@ RUN dotnet publish "LogMonitorService.csproj" -c Release -o /app/publish /p:UseA
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
 ENTRYPOINT ["dotnet", "LogMonitorService.dll"]

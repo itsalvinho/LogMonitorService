@@ -38,12 +38,8 @@ namespace LogMonitorService
 
         public void Configure(WebApplication app, IWebHostEnvironment env)
         {
-            app.UseHttpsRedirection();
-
-            app.UseAuthorization();
-
+            //app.UseAuthorization();
             app.MapControllers();
-
             app.Run();
         }
     }
