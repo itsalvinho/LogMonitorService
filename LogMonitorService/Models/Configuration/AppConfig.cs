@@ -6,7 +6,7 @@
     public class AppConfig
     {
         public string PathToLogs { get; set; }
-        public long DefaultNumberOfLogsToReturn { get; set; } = 100;
+        public long DefaultNumberOfLogsToReturn { get; set; } = -1;
         public string Encoding { get; set; } = "UTF-8";
     }
 }
